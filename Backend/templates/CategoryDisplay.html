@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Category Table</h4>
+
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Category Name</th>
+                          <th>Language</th>
+                          <th>Genre</th>
+                          <th>Editing Option</th>
+                          <th>Deleting  Option</th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for i in details %}
+                        <tr>
+                          <td>{{i.Cat_Name}}</td>
+                          <td>{{i.Language}}</td>
+                          <td>{{i.Genre}}</td>
+                          <td>
+                              <form action="{% url 'edit_cat' dataid=i.id %}">
+                                  <button type="submit" class="btn btn-dark btn-icon-text">
+                                            Edit
+                                     <i class="mdi mdi-file-check btn-icon-append"></i>
+                                    </button>
+                              </form>
+                          </td>
+                          <td>
+                             <form action="{% url 'remv_cat' dataid=i.id %}">
+                                 <button type="submit" class="btn btn-danger">Delete</button>
+                             </form>
+                          </td>
+                        </tr>
+                      {% endfor %}
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if messages %}
+    {% for i in messages %}
+        {% if i.tags == 'warning' %}
+            <script>
+                swal('{{i}}','','warning')
+            </script>
+        {% elif i.tags == 'error' %}
+            <script>
+                swal('{{i}}','','error')
+            </script>
+        {% elif i.tags == 'success' %}
+             <script>
+                swal('{{i}}','','success')
+            </script>
+        {% else %}
+             <script>
+                swal('{{i}}','','info')
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+</body>
+</html>
+{% endblock %}

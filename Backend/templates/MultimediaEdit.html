@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ <div class="card">
+      <form method="post" action="{% url 'update_mult' dataid=info.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+
+          <div class="card-body">
+                  <h4 class="card-title">Multimedia Details</h4>
+<!--                  <p class="card-description">-->
+<!--                    Add classes like <code>.form-control-lg</code> and <code>.form-control-sm</code>.-->
+<!--                  </p>-->
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect1">Multimedia type</label>
+                    <select class="form-control form-control-lg" id="exampleFormControlSelect1" name="tname">
+                      <option>{{info.Multi_name}}</option>
+                        {% for l in data %}
+                      <option>{{l.Cat_Name}}</option>
+                        {% endfor %}
+
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect2">Language Selection</label>
+                    <select class="form-control" id="exampleFormControlSelect2" name="lname">
+                      <option>{{info.Multi_lang}}</option>
+                        {% for m in data %}
+                      <option>{{m.Language}}</option>
+                        {% endfor %}
+
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect3">Genre Selection</label>
+                    <select class="form-control form-control-sm" id="exampleFormControlSelect3" name="gen">
+                      <option>{{info.Multi_genre}}</option>
+                        {% for n in data %}
+                      <option>{{n.Genre}}</option>
+                        {% endfor %}
+
+                    </select>
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleInputUsername1">Title</label>
+                      <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Title" name="title" value="{{info.Title}}">
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleInputUsername1">Description</label>
+                      <textarea class="form-control" placeholder="Description" name="description">{{info.Description}}</textarea>
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleInputUsername1">About</label>
+                      <input type="text" class="form-control" id="exampleInputUsername1" placeholder="About" name="about" value="{{info.About}}">
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleInputUsername1">Cast</label>
+                      <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Cast" name="cast" value="{{info.Cast}}">
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleInputUsername1">Image Preview:</label><br><br>
+                        {% if info.image %}
+                        <img src="{{info.image.url}}" width="350px" height="250px"><br><br>
+                        {% endif %}
+
+                      <label for="exampleInputUsername1">Image</label>
+                      <input type="file" class="form-control"  placeholder="Image" name="image" >
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleInputUsername1">File Preview:</label><br><br>
+                      <video width="350px" height="350px" controls>
+                          <source src="{{info.File.url}}" type="video/mp4">
+                      </video><br><br>
+                      <label for="exampleInputUsername1">Multimedia File</label>
+                      <input type="file" class="form-control"  placeholder="Add file" name="file">
+                  </div>
+
+                  <button type="submit" class="btn btn-primary mr-2">Update</button>
+
+          </div>
+      </form>
+
+  </div>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,156 @@
+{% extends 'Home.html' %}
+
+{% block content %}
+    <h2 class="text center" style="text-align:center; color:red; font-family: Times New Roman;">Search Results</h2>
+        <hr>
+    <section class="product-page spad">
+        <div class="container">
+            <div class="row">
+                {% if data %}
+                            {% for n in data %}
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="{{n.image.url}}">
+                                        <div class="ep" style="margin-top:280px">
+                                            {% if request.session.username %}
+                                            <a href="{% url 'single_mult_page' videoid=n.id %}"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                                            {% else %}
+                                            <a href="{% url 'signup' %}"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                                            {% endif %}
+                                        </div>
+<!--                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>-->
+<!--                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>-->
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>{{n.Multi_lang}}</li>
+                                            <li>{{n.Multi_genre}}</li>
+
+                                        </ul>
+                                        <h5><a href="#">{{n.Title}}</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                {% endif %}
+
+<!--                            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                                <div class="product__item">-->
+<!--                                    <div class="product__item__pic set-bg" data-setbg="img/trending/trend-2.jpg">-->
+<!--                                        <div class="ep">18 / 18</div>-->
+<!--                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>-->
+<!--                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product__item__text">-->
+<!--                                        <ul>-->
+<!--                                            <li>Active</li>-->
+<!--                                            <li>Movie</li>-->
+<!--                                        </ul>-->
+<!--                                        <h5><a href="#">Gintama Movie 2: Kanketsu-hen - Yorozuya yo Eien</a></h5>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                                <div class="product__item">-->
+<!--                                    <div class="product__item__pic set-bg" data-setbg="img/trending/trend-3.jpg">-->
+<!--                                        <div class="ep">18 / 18</div>-->
+<!--                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>-->
+<!--                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product__item__text">-->
+<!--                                        <ul>-->
+<!--                                            <li>Active</li>-->
+<!--                                            <li>Movie</li>-->
+<!--                                        </ul>-->
+<!--                                        <h5><a href="#">Shingeki no Kyojin Season 3 Part 2</a></h5>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                                <div class="product__item">-->
+<!--                                    <div class="product__item__pic set-bg" data-setbg="img/trending/trend-4.jpg">-->
+<!--                                        <div class="ep">18 / 18</div>-->
+<!--                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>-->
+<!--                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product__item__text">-->
+<!--                                        <ul>-->
+<!--                                            <li>Active</li>-->
+<!--                                            <li>Movie</li>-->
+<!--                                        </ul>-->
+<!--                                        <h5><a href="#">Fullmetal Alchemist: Brotherhood</a></h5>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                                <div class="product__item">-->
+<!--                                    <div class="product__item__pic set-bg" data-setbg="img/trending/trend-5.jpg">-->
+<!--                                        <div class="ep">18 / 18</div>-->
+<!--                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>-->
+<!--                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product__item__text">-->
+<!--                                        <ul>-->
+<!--                                            <li>Active</li>-->
+<!--                                            <li>Movie</li>-->
+<!--                                        </ul>-->
+<!--                                        <h5><a href="#">Shiratorizawa Gakuen Koukou</a></h5>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                                <div class="product__item">-->
+<!--                                    <div class="product__item__pic set-bg" data-setbg="img/trending/trend-6.jpg">-->
+<!--                                        <div class="ep">18 / 18</div>-->
+<!--                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>-->
+<!--                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product__item__text">-->
+<!--                                        <ul>-->
+<!--                                            <li>Active</li>-->
+<!--                                            <li>Movie</li>-->
+<!--                                        </ul>-->
+<!--                                        <h5><a href="#">Code Geass: Hangyaku no Lelouch R2</a></h5>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                {% if mal %}
+                    {% for n in mal %}
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="{{n.img.url}}">
+                                        <div class="ep" style="margin-top:280px">
+                                            {% if request.session.username %}
+                                            <a href="{% url 'mal_film_single_page' malid=n.id %}"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                                            {% else %}
+                                            <a href="{% url 'signup' %}"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                                            {% endif %}
+                                        </div>
+<!--                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>-->
+<!--                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>-->
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>{{n.genre}}</li>
+                                            <li>{{n.time}}</li>
+
+                                        </ul>
+                                        <h5><a href="#">{{n.MalTitle}}</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                             {% endfor %}
+                {% endif %}
+
+                 {% if not data and not mal %}
+                    <div class="col-lg-12" style="text-align:center; color:red; font-family: Times New Roman;">
+                        <h2 style="color: green">No Results found</h2>
+                    </div>
+                {% endif %}
+        </div>
+
+    </div>
+</section>
+
+
+{% endblock %}

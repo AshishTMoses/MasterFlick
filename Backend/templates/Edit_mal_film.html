@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Edit Malayalam Films</h4>
+                  <p class="card-description">
+                    Details Of Malayalam Films
+                  </p>
+                  <form class="forms-sample" method="post" action="{% url 'update_mal_film' dataid=data.id %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                      <label for="exampleInputName1">Title</label>
+                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Title" name="title" value="{{data.MalTitle}}">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Genre</label>
+                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Genre" name="genre" value="{{data.genre}}">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleTextarea1">Description</label>
+                      <textarea class="form-control" id="exampleTextarea1" rows="4" name="desc" placeholder="Description">{{data.description}}</textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Cast</label>
+                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Cast" name="cast" value="{{data.cast}}">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Time</label>
+                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Duration" name="duration" value="{{data.time}}">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Image Preview:</label><br><br>
+                        {% if data.img %}
+                        <img src="{{data.img.url}}" width="350px" height="250px"><br><br>
+                        {% endif %}
+                    </div>
+                      <div class="form-group">
+                      <label for="exampleInputName1">Image</label>
+                      <input type="file" class="form-control" id="exampleInputName1" placeholder="Image" name="image">
+                       </div>
+                      <div class="form-group">
+                        <label for="exampleInputName1">File Preview:</label><br>
+                        <video width="350px" height="350px" controls>
+                          <source src="{{data.vid.url}}" type="video/mp4">
+                        </video><br>
+                      </div>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Video</label>
+                      <input type="file" class="form-control" id="exampleInputName1" placeholder="Video" name="video">
+                    </div>
+                      <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button class="btn btn-light">Cancel</button>
+                  </form>
+                </div>
+</div>
+
+</body>
+</html>
+{% endblock %}

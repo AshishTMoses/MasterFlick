@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Category Table</h4>
+
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Multimedia Name</th>
+                          <th>Multimedia Language</th>
+                          <th>Multimedia Genre</th>
+                          <th>Title</th>
+                          <th>Description</th>
+                          <th>About</th>
+                          <th>Cast</th>
+                          <th>Multimedia Image</th>
+                          <th>Multimedia File</th>
+                          <th>Editing Option</th>
+                          <th>Deleting  Option</th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for j in show %}
+                        <tr>
+                          <td>{{j.Multi_name}}</td>
+                          <td>{{j.Multi_lang}}</td>
+                          <td>{{j.Multi_genre}}</td>
+                          <td>{{j.Title}}</td>
+                          <td>{{j.Description}}</td>
+                          <td>{{j.About}}</td>
+                          <td>{{j.Cast}}</td>
+                           <td>
+                            {% if j.image %}
+                            <img src="{{j.image.url}}" height="800px;" width="700px;" >
+                             {% else %}
+                            <p>No image available</p>
+                             {% endif %}
+                             </td>
+
+                          <td>
+                              <video width="200px" height="200px" controls>
+                                  <source src="{{j.File.url}}" type="video/mp4">
+                              </video>
+                          </td>
+                          <td>
+                              <form action="{% url 'edit_mult' dataid=j.id %}">
+                                  <button type="submit" class="btn btn-dark btn-icon-text">
+                                            Edit
+                                     <i class="mdi mdi-file-check btn-icon-append"></i>
+                                    </button>
+                              </form>
+                          </td>
+                          <td>
+                             <form action="{% url 'mult_delt' dataid=j.id %}">
+                                 <button type="submit" class="btn btn-danger">Delete</button>
+                             </form>
+                          </td>
+                        </tr>
+                      {% endfor %}
+
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if messages %}
+    {% for i in messages %}
+        {% if i.tags == 'warning' %}
+            <script>
+                swal('{{i}}','','warning')
+            </script>
+        {% elif i.tags == 'error' %}
+            <script>
+                swal('{{i}}','','error')
+            </script>
+        {% elif i.tags == 'success' %}
+             <script>
+                swal('{{i}}','','success')
+            </script>
+        {% else %}
+             <script>
+                swal('{{i}}','','info')
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+</body>
+</html>
+{% endblock %}

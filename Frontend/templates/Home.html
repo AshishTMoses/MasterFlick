@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Anime Template">
+    <meta name="keywords" content="Anime, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Anime | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'assets/css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'assets/css/plyr.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'assets/css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" type="text/css">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="header__logo">
+                        <a href="./index.html">
+                            <img src="{% static 'assets/img/logo.png' %}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="header__nav">
+                        <nav class="header__menu mobile-menu navbar bg-body-tertiary">
+                            <ul>
+                                <li class="active"><a href="{% url 'home_page' %}">Homepage</a></li>
+<!--                                <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>-->
+<!--                                    <ul class="dropdown">-->
+<!--                                        <li><a href="./categories.html">Categories</a></li>-->
+<!--                                        <li><a href="./anime-details.html">Anime Details</a></li>-->
+<!--                                        <li><a href="./anime-watching.html">Anime Watching</a></li>-->
+<!--                                        <li><a href="./blog-details.html">Blog Details</a></li>-->
+<!--                                        <li><a href="{% url 'signup' %}">Sign Up</a></li>-->
+<!--                                        <li><a href="{% url 'login_page' %}">Login</a></li>-->
+<!--                                    </ul>-->
+<!--                                </li>-->
+<!--                                <li><a href="./blog.html">Our Blog</a></li>-->
+<!--                                <li><a href="#">Contacts</a></li>-->
+                                    {% if request.session.username %}
+                                <li><a href="./categories.html">Welcome  {{request.session.username}} <span class="arrow_carrot-down"></span></a>
+
+                                    <ul class="dropdown">
+
+                                        <li><a href="{% url 'logout' %}">logut</a></li>
+
+
+
+                                    </ul>
+                                </li>
+                                   {% else %}
+                                <li><a href="{% url 'signup' %}">Register</a></li>
+                                <li><a href="{% url 'login_page' %}">login</a></li>
+                                {% endif %}
+                            </ul>
+                                 <nav class="navbar bg-body-tertiary">
+                                     <div class="container-fluid">
+                                        <form class="d-flex" role="search" method="get" action="{% url 'searchBar' %}">
+                                            <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" name="query">
+                                            <button class="btn btn-outline-success" type="submit">Search</button>
+                                       </form>
+                                    </div>
+</nav>
+                        </nav>
+                    </div>
+                </div>
+<!--                <div class="col-lg-2">-->
+<!--                    <div class="header__right">-->
+<!--                        <a href="#" class="search-switch"><span class="icon_search"></span></a>-->
+<!--                        <button>Search</button>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div id="mobile-menu-wrap"></div>
+        </div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Hero Section Begin -->
+{% block content %}
+    <section class="hero">
+        <div class="container">
+            <div class="hero__slider owl-carousel">
+                {% for i in data %}
+                <div class="hero__items set-bg" data-setbg="{{i.image.url}}">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="hero__text">
+                                <div class="label">{{i.Multi_genre}}</div>
+                                <h2>{{i.Title}}</h2>
+                                <p>{{i.Description}}</p>
+                                {% if request.session.username %}
+                                <a href="{% url 'single_mult_page' videoid=i.id %}"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                                {% else %}
+                                <a href="{% url 'signup' %}"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+<!--                <div class="hero__items set-bg" data-setbg="{% static 'assets/img/hero/hero-1.jpg' %}">-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-lg-6">-->
+<!--                            <div class="hero__text">-->
+<!--                                <div class="label">Adventure</div>-->
+<!--                                <h2>Fate / Stay Night: Unlimited Blade Works</h2>-->
+<!--                                <p>After 30 days of travel across the world...</p>-->
+<!--                                <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="hero__items set-bg" data-setbg="{% static 'assets/img/hero/hero-1.jpg' %}">-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-lg-6">-->
+<!--                            <div class="hero__text">-->
+<!--                                <div class="label">Adventure</div>-->
+<!--                                <h2>Fate / Stay Night: Unlimited Blade Works</h2>-->
+<!--                                <p>After 30 days of travel across the world...</p>-->
+<!--                                <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Product Section Begin -->
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="trending__product">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <div class="section-title">
+                                    <h4>Trending Now</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <div class="btn__all">
+                                    <a href="{% url 'cat_view_all' %}" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            {% for m in data %}
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="{{m.image.url}}">
+                                        <div class="ep" style="margin-top:280px">
+                                            {% if request.session.username %}
+                                            <a href="{% url 'single_mult_page' videoid=m.id %}"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                                            {% else %}
+                                            <a href="{% url 'signup' %}"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                                            {% endif %}
+
+                                        </div>
+<!--                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>-->
+<!--                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>-->
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>{{m.Multi_lang}}</li>
+                                            <li>{{m.Multi_genre}}</li>
+                                        </ul>
+                                        <h5><a href="#">{{m.Title}}</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+<!--                            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                                <div class="product__item">-->
+<!--                                    <div class="product__item__pic set-bg" data-setbg="img/trending/trend-2.jpg">-->
+<!--                                        <div class="ep">18 / 18</div>-->
+<!--                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>-->
+<!--                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product__item__text">-->
+<!--                                        <ul>-->
+<!--                                            <li>Active</li>-->
+<!--                                            <li>Movie</li>-->
+<!--                                        </ul>-->
+<!--                                        <h5><a href="#">Gintama Movie 2: Kanketsu-hen - Yorozuya yo Eien</a></h5>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                                <div class="product__item">-->
+<!--                                    <div class="product__item__pic set-bg" data-setbg="img/trending/trend-3.jpg">-->
+<!--                                        <div class="ep">18 / 18</div>-->
+<!--                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>-->
+<!--                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product__item__text">-->
+<!--                                        <ul>-->
+<!--                                            <li>Active</li>-->
+<!--                                            <li>Movie</li>-->
+<!--                                        </ul>-->
+<!--                                        <h5><a href="#">Shingeki no Kyojin Season 3 Part 2</a></h5>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                                <div class="product__item">-->
+<!--                                    <div class="product__item__pic set-bg" data-setbg="img/trending/trend-4.jpg">-->
+<!--                                        <div class="ep">18 / 18</div>-->
+<!--                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>-->
+<!--                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product__item__text">-->
+<!--                                        <ul>-->
+<!--                                            <li>Active</li>-->
+<!--                                            <li>Movie</li>-->
+<!--                                        </ul>-->
+<!--                                        <h5><a href="#">Fullmetal Alchemist: Brotherhood</a></h5>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                                <div class="product__item">-->
+<!--                                    <div class="product__item__pic set-bg" data-setbg="img/trending/trend-5.jpg">-->
+<!--                                        <div class="ep">18 / 18</div>-->
+<!--                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>-->
+<!--                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product__item__text">-->
+<!--                                        <ul>-->
+<!--                                            <li>Active</li>-->
+<!--                                            <li>Movie</li>-->
+<!--                                        </ul>-->
+<!--                                        <h5><a href="#">Shiratorizawa Gakuen Koukou</a></h5>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                                <div class="product__item">-->
+<!--                                    <div class="product__item__pic set-bg" data-setbg="img/trending/trend-6.jpg">-->
+<!--                                        <div class="ep">18 / 18</div>-->
+<!--                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>-->
+<!--                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product__item__text">-->
+<!--                                        <ul>-->
+<!--                                            <li>Active</li>-->
+<!--                                            <li>Movie</li>-->
+<!--                                        </ul>-->
+<!--                                        <h5><a href="#">Code Geass: Hangyaku no Lelouch R2</a></h5>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+</div>
+</div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="trending__product">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <div class="section-title">
+                                    <h4>Malayalam</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <div class="btn__all">
+                                    <a href="{% url 'mal_view_all' %}" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            {% for n in item %}
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="{{n.img.url}}">
+                                        <div class="ep" style="margin-top:280px">
+                                            {% if request.session.username %}
+                                            <a href="{% url 'mal_film_single_page' malid=n.id %}"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                                            {% else %}
+                                            <a href="{% url 'signup' %}"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                                            {% endif %}
+                                        </div>
+<!--                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>-->
+<!--                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>-->
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>{{n.time}}</li>
+                                            <li>{{n.genre}}</li>
+
+                                        </ul>
+                                        <h5><a href="#">{{n.MalTitle}}</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+<!--                            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                                <div class="product__item">-->
+<!--                                    <div class="product__item__pic set-bg" data-setbg="img/trending/trend-2.jpg">-->
+<!--                                        <div class="ep">18 / 18</div>-->
+<!--                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>-->
+<!--                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product__item__text">-->
+<!--                                        <ul>-->
+<!--                                            <li>Active</li>-->
+<!--                                            <li>Movie</li>-->
+<!--                                        </ul>-->
+<!--                                        <h5><a href="#">Gintama Movie 2: Kanketsu-hen - Yorozuya yo Eien</a></h5>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                                <div class="product__item">-->
+<!--                                    <div class="product__item__pic set-bg" data-setbg="img/trending/trend-3.jpg">-->
+<!--                                        <div class="ep">18 / 18</div>-->
+<!--                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>-->
+<!--                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product__item__text">-->
+<!--                                        <ul>-->
+<!--                                            <li>Active</li>-->
+<!--                                            <li>Movie</li>-->
+<!--                                        </ul>-->
+<!--                                        <h5><a href="#">Shingeki no Kyojin Season 3 Part 2</a></h5>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                                <div class="product__item">-->
+<!--                                    <div class="product__item__pic set-bg" data-setbg="img/trending/trend-4.jpg">-->
+<!--                                        <div class="ep">18 / 18</div>-->
+<!--                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>-->
+<!--                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product__item__text">-->
+<!--                                        <ul>-->
+<!--                                            <li>Active</li>-->
+<!--                                            <li>Movie</li>-->
+<!--                                        </ul>-->
+<!--                                        <h5><a href="#">Fullmetal Alchemist: Brotherhood</a></h5>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                                <div class="product__item">-->
+<!--                                    <div class="product__item__pic set-bg" data-setbg="img/trending/trend-5.jpg">-->
+<!--                                        <div class="ep">18 / 18</div>-->
+<!--                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>-->
+<!--                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product__item__text">-->
+<!--                                        <ul>-->
+<!--                                            <li>Active</li>-->
+<!--                                            <li>Movie</li>-->
+<!--                                        </ul>-->
+<!--                                        <h5><a href="#">Shiratorizawa Gakuen Koukou</a></h5>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                                <div class="product__item">-->
+<!--                                    <div class="product__item__pic set-bg" data-setbg="img/trending/trend-6.jpg">-->
+<!--                                        <div class="ep">18 / 18</div>-->
+<!--                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>-->
+<!--                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product__item__text">-->
+<!--                                        <ul>-->
+<!--                                            <li>Active</li>-->
+<!--                                            <li>Movie</li>-->
+<!--                                        </ul>-->
+<!--                                        <h5><a href="#">Code Geass: Hangyaku no Lelouch R2</a></h5>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+</div>
+</div>
+</section>
+<!-- Product Section End -->
+
+<!-- Footer Section Begin -->
+{% endblock %}
+<footer class="footer">
+    <div class="page-up">
+        <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="footer__logo">
+                    <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+
+            </div>
+            <div class="col-lg-3">
+                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Admin</a>
+                  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+
+              </div>
+          </div>
+      </div>
+  </footer>
+  <!-- Footer Section End -->
+
+  <!-- Search model Begin -->
+  <div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch"><i class="icon_close"></i></div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+
+<!-- Search model end -->
+
+<!-- Js Plugins -->
+<script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/player.js' %}"></script>
+<script src="{% static 'assets/js/jquery.nice-select.min.js' %}"></script>
+<script src="{% static 'assets/js/mixitup.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery.slicknav.js' %}"></script>
+<script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'assets/js/main.js' %}"></script>
+<script type="text/javascript">
+    (function(d, m){
+        var kommunicateSettings =
+            {"appId":"3234accfbfa0b57a69152aa2d9de7371a","popupWidget":true,"automaticChatOpenOnNavigation":true};
+        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+        window.kommunicate = m; m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if messages %}
+    {% for i in messages %}
+        {% if i.tags == 'warning' %}
+            <script>
+                swal('{{i}}','','warning')
+            </script>
+        {% elif i.tags == 'error' %}
+            <script>
+                swal('{{i}}','','error')
+            </script>
+        {% elif i.tags == 'success' %}
+             <script>
+                swal('{{i}}','','success')
+            </script>
+        {% else %}
+             <script>
+                swal('{{i}}','','info')
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="card">
+                <div class="card-body">
+                  <h4 class="card-title"></h4>
+                  <p class="card-description">
+                    Category Page
+                  </p>
+                  <form class="forms-sample" method="post" action="{% url 'save_cat' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="exampleInputUsername1"></label>
+                      <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Add Category Name" name="Name">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputUsername1">Language</label>
+                      <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Language" name="language">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputUsername1">Genre</label>
+                      <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Genre" name="genre">
+                    </div>
+
+<!--                    <div class="form-group">-->
+<!--                      <label for="exampleInputEmail1">Email address</label>-->
+<!--                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                      <label for="exampleInputPassword1">Password</label>-->
+<!--                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                      <label for="exampleInputConfirmPassword1">Confirm Password</label>-->
+<!--                      <input type="password" class="form-control" id="exampleInputConfirmPassword1" placeholder="Password">-->
+<!--                    </div>-->
+<!--                    <div class="form-check form-check-flat form-check-primary">-->
+<!--                      <label class="form-check-label">-->
+<!--                        <input type="checkbox" class="form-check-input">-->
+<!--                        Remember me-->
+<!--                      <i class="input-helper"></i></label>-->
+<!--                    </div>-->
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button type="reset" class="btn btn-light">Cancel</button>
+                  </form>
+                </div>
+              </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if messages %}
+    {% for i in messages %}
+        {% if i.tags == 'warning' %}
+            <script>
+                swal('{{i}}','','warning')
+            </script>
+        {% elif i.tags == 'error' %}
+            <script>
+                swal('{{i}}','','error')
+            </script>
+        {% elif i.tags == 'success' %}
+             <script>
+                swal('{{i}}','','success')
+            </script>
+        {% else %}
+             <script>
+                swal('{{i}}','','info')
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+</body>
+</html>
+{% endblock %}

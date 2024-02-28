@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Anime Template">
+    <meta name="keywords" content="Anime, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Anime | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'assets/css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'assets/css/plyr.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'assets/css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" type="text/css">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="header__logo">
+                        <a href="./index.html">
+                            <img src="img/logo.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="header__nav">
+                        {% block content %}
+                        <nav class="header__menu mobile-menu">
+                            <ul>
+                                <li class="active"><a href="{% url 'home_page' %}">Homepage</a></li>
+<!--                                <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>-->
+<!--                                    <ul class="dropdown">-->
+<!--                                        <li><a href="./categories.html">Categories</a></li>-->
+<!--                                        <li><a href="./anime-details.html">Anime Details</a></li>-->
+<!--                                        <li><a href="./anime-watching.html">Anime Watching</a></li>-->
+<!--                                        <li><a href="./blog-details.html">Blog Details</a></li>-->
+<!--                                        <li><a href="{% url 'signup' %}">Sign Up</a></li>-->
+<!--                                        <li><a href="{% url 'login_page' %}">Login</a></li>-->
+<!--                                    </ul>-->
+<!--                                </li>-->
+<!--                                <li><a href="./blog.html">Our Blog</a></li>-->
+<!--                                <li><a href="#">Contacts</a></li>-->
+                                    {% if request.session.username %}
+                                <li><a href="./categories.html">Welcome  {{request.session.username}} <span class="arrow_carrot-down"></span></a>
+
+                                    <ul class="dropdown">
+
+                                        <li><a href="{% url 'logout' %}">logut</a></li>
+
+
+                                    </ul>
+                                </li>
+                                   {% else %}
+                                <li><a href="{% url 'signup' %}">Register</a></li>
+                                <li><a href="{% url 'login_page' %}">login</a></li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Normal Breadcrumb Begin -->
+    <section class="normal-breadcrumb set-bg" data-setbg="img/normal-breadcrumb.jpg">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="normal__breadcrumb__text">
+                        <h2>Sign Up</h2>
+                        <p>Welcome to the MasterFlick</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Normal Breadcrumb End -->
+
+    <!-- Signup Section Begin -->
+    <section class="signup spad">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="login__form">
+                        <h3>Sign Up</h3>
+                        <form action="{% url 'save_signup' %}" method="post" id="form">
+                         {% csrf_token %}
+                            <div class="input__item">
+                                <input type="text" placeholder="Email address" name="email" id="email" required>
+                                <span class="icon_mail"></span>
+                            </div>
+                            <div class="input__item">
+                                <input type="text" placeholder="Your Name" name="username" id="username" required>
+                                <span class="icon_profile"></span>
+                            </div>
+                            <div class="input__item">
+                                <input type="password" placeholder="Password" name="password" id="password" required>
+                                <span class="icon_lock"></span>
+                            </div>
+                            <button type="submit" class="site-btn">Get Started</button>
+                        </form>
+                        <h5>Already have an account? <a href="{% url 'login_page' %}">Log In!</a></h5>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="login__social__links">
+                        <img src="{% static 'assets/image/camera-219958_1280.jpg' %}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signup Section End -->
+
+    <!-- Footer Section Begin -->
+    <footer class="footer">
+    <div class="page-up">
+        <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="footer__logo">
+                    <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+
+            </div>
+            <div class="col-lg-3">
+                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Admin</a>
+                  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+
+              </div>
+          </div>
+      </div>
+  </footer>
+      <!-- Footer Section End -->
+
+      <!-- Search model Begin -->
+      <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch"><i class="icon_close"></i></div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search model end -->
+    {% endblock %}
+
+    <!-- Js Plugins -->
+    <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/player.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'assets/js/mixitup.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+<!--    <script>-->
+<!--// Get the form element by its id-->
+<!--var form = document.getElementById("form");-->
+
+<!--// Add an event listener to the form's submit event-->
+<!--form.addEventListener("submit", function(event) {-->
+<!--  // Prevent the default form submission behavior-->
+<!--  event.preventDefault();-->
+
+<!--  // Get the input elements by their names-->
+<!--  var email = document.getElementsByName("email")[0];-->
+<!--  var username = document.getElementsByName("username")[0];-->
+<!--  var password = document.getElementsByName("password")[0];-->
+
+<!--  // Declare a variable to store the validation status-->
+<!--  var isValid = true;-->
+
+<!--  // Check if the email input is empty or invalid-->
+<!--  if (email.value.trim() === "" || !email.checkValidity()) {-->
+<!--    // Display an alert message-->
+<!--    alert("Please enter a valid email address");-->
+<!--    // Set the validation status to false-->
+<!--    isValid = false;-->
+<!--    // Focus on the email input-->
+<!--    email.focus();-->
+<!--  }-->
+
+<!--  // Check if the username input is empty-->
+<!--  else if (username.value.trim() === "") {-->
+<!--    // Display an alert message-->
+<!--    alert("Please enter your name");-->
+<!--    // Set the validation status to false-->
+<!--    isValid = false;-->
+<!--    // Focus on the username input-->
+<!--    username.focus();-->
+<!--  }-->
+
+<!--  // Check if the password input is empty-->
+<!--  else if (password.value.trim() === "") {-->
+<!--    // Display an alert message-->
+<!--    alert("Please enter a password");-->
+<!--    // Set the validation status to false-->
+<!--    isValid = false;-->
+<!--    // Focus on the password input-->
+<!--    password.focus();-->
+<!--  }-->
+
+<!--  // If the validation status is true, submit the form-->
+<!--  if (isValid) {-->
+<!--    form.submit();-->
+<!--  }-->
+<!--});-->
+<!--</script>-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if messages %}
+    {% for i in messages %}
+        {% if i.tags == 'warning' %}
+            <script>
+                swal('{{i}}','','warning')
+            </script>
+        {% elif i.tags == 'error' %}
+            <script>
+                swal('{{i}}','','error')
+            </script>
+        {% elif i.tags == 'success' %}
+             <script>
+                swal('{{i}}','','success')
+            </script>
+        {% else %}
+             <script>
+                swal('{{i}}','','info')
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+
+</body>
+
+</html>

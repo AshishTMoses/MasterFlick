@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+  <div class="card">
+      <form method="post" action="{% url 'save_multimedia' %}" enctype="multipart/form-data">
+       {% csrf_token %}
+          <div class="card-body">
+                  <h4 class="card-title">Multimedia Details</h4>
+<!--                  <p class="card-description">-->
+<!--                    Add classes like <code>.form-control-lg</code> and <code>.form-control-sm</code>.-->
+<!--                  </p>-->
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect1">Multimedia type</label>
+                    <select class="form-control form-control-lg" id="exampleFormControlSelect1" name="tname">
+                      <option>Select Category</option>
+                        {% for d in doc %}
+                      <option>{{d.Cat_Name}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect2">Language Selection</label>
+                    <select class="form-control" id="exampleFormControlSelect2" name="lname">
+                      <option>select language</option>
+                        {% for s in doc %}
+                      <option>{{s.Language}}</option>
+                        {% endfor %}
+
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect3">Genre Selection</label>
+                    <select class="form-control form-control-sm" id="exampleFormControlSelect3" name="gen">
+                      <option>Select Genre</option>
+                        {% for k in doc %}
+                      <option>{{k.Genre}}</option>
+                        {% endfor %}
+
+                    </select>
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleInputUsername1">Title</label>
+                      <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Title" name="title">
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleInputUsername1">Description</label>
+                      <textarea class="form-control" placeholder="Description" name="description"></textarea>
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleInputUsername1">About</label>
+                      <input type="text" class="form-control" id="exampleInputUsername1" placeholder="About" name="about">
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleInputUsername1">Cast</label>
+                      <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Cast" name="cast">
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleInputUsername1">Image</label>
+                      <input type="file" class="form-control" id="exampleInputUsername1" placeholder="Image" name="image">
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleInputUsername1">Multimedia File</label>
+                      <input type="file" class="form-control" id="exampleInputUsername1" placeholder="Add file" name="file">
+                  </div>
+
+                  <button type="submit" class="btn btn-primary mr-2">Add</button>
+                  <button type="reset" class="btn btn-light">Cancel</button>
+          </div>
+      </form>
+
+  </div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if messages %}
+    {% for i in messages %}
+        {% if i.tags == 'warning' %}
+            <script>
+                swal('{{i}}','','warning')
+            </script>
+        {% elif i.tags == 'error' %}
+            <script>
+                swal('{{i}}','','error')
+            </script>
+        {% elif i.tags == 'success' %}
+             <script>
+                swal('{{i}}','','success')
+            </script>
+        {% else %}
+             <script>
+                swal('{{i}}','','info')
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Category Table</h4>
+
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Title</th>
+                          <th>Genre</th>
+                          <th>Description</th>
+                          <th>Cast</th>
+                          <th>Duration</th>
+                          <th>Image</th>
+                          <th>Video</th>
+                          <th>Edit Option</th>
+                          <th>Delete Option</th>
+
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for k in now %}
+                        <tr>
+                          <td>{{k.MalTitle}}</td>
+                          <td>{{k.genre}}</td>
+                          <td>{{k.description}}</td>
+                          <td>{{k.cast}}</td>
+                          <td>{{k.time}}</td>
+
+
+                           <td>
+                            {% if k.img %}
+                            <img src="{{k.img.url}}" width="700px;" height="800px;">
+                            {% else %}
+                            <p>No image available</p>
+                            {% endif %}
+                           </td>
+
+                          <td>
+                              <video width="200px" height="200px" controls>
+                                  <source src="{{k.vid.url}}" type="video/mp4">
+                              </video>
+                          </td>
+                          <td>
+                              <form action="{% url 'edit_mal_film' dataid=k.id %}">
+                                  <button type="submit" class="btn btn-dark btn-icon-text">
+                                            Edit
+                                     <i class="mdi mdi-file-check btn-icon-append"></i>
+                                    </button>
+                              </form>
+                          </td>
+                          <td>
+                             <form action="{% url 'cnc_mal_film' dataid=k.id %}">
+                                 <button type="submit" class="btn btn-danger">Delete</button>
+                             </form>
+                          </td>
+                        </tr>
+                      {% endfor %}
+
+
+
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</body>
+</html>
+{% endblock %}
